@@ -5,7 +5,7 @@ import useLocalStorage from "./Hooks/useLocalStorage";
 const App = () => {
 	const [data, setData] = useLocalStorage("data", "");
 	const [isCopied, handleCopy] = useCopy();
-	const [location, error] = useGeolocation();
+	const [location, getLocation, error] = useGeolocation();
 
 	return (
 		<div className="App">
@@ -24,8 +24,12 @@ const App = () => {
 					{`long => ${location?.long}`}
 				</h3>
 			) : (
-				<p>{error}</p>
+				<p style={{ color: "red" }}>{error}</p>
 			)}
+
+			<button type="button" onClick={getLocation}>
+				Location
+			</button>
 		</div>
 	);
 };

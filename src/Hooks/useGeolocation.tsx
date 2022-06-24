@@ -19,6 +19,7 @@ const useGeolocation = () => {
 			lat: position.coords.latitude,
 			long: position.coords.longitude,
 		});
+		setError("");
 	}
 
 	function showError(error: any) {
@@ -37,10 +38,10 @@ const useGeolocation = () => {
 				break;
 		}
 	}
-	useEffect(() => {
-		getLocation();
-	}, []);
+	// useEffect(() => {
+	// 	getLocation();
+	// }, []);
 
-	return [location, error] as const;
+	return [location, getLocation, error] as const;
 };
 export default useGeolocation;
