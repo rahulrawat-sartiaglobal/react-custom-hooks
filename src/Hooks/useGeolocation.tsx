@@ -38,9 +38,9 @@ const useGeolocation = () => {
 				break;
 		}
 	}
-	// useEffect(() => {
-	// 	getLocation();
-	// }, []);
+	useEffect(() => {
+		getLocation();
+	}, []);
 
 	return [location, getLocation, error] as const;
 };

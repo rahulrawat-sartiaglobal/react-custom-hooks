@@ -6,6 +6,10 @@ const App = () => {
 	const [data, setData] = useLocalStorage("data", "");
 	const [isCopied, handleCopy] = useCopy();
 	const [location, getLocation, error] = useGeolocation();
+	const [locationLatLong, setLocationLatLong] = useLocalStorage(
+		"location",
+		location
+	);
 
 	return (
 		<div className="App">
@@ -20,14 +24,20 @@ const App = () => {
 			</button>
 			{error === "" ? (
 				<h3>
-					My Location is <br /> {`lat => ${location?.lat}`} <br />{" "}
-					{`long => ${location?.long}`}
+					My Location is <br /> {`lat => ${locationLatLong?.lat}`} <br />{" "}
+					{`long => ${locationLatLong?.long}`}
 				</h3>
 			) : (
 				<p style={{ color: "red" }}>{error}</p>
 			)}
 
-			<button type="button" onClick={getLocation}>
+			<button
+				type="button"
+				onClick={() => {
+					getLocation();
+					setLocationLatLong(location);
+				}}
+			>
 				Location
 			</button>
 		</div>
